@@ -1,0 +1,300 @@
+{"sql": "SELECT SUM(data_usage) FROM eu_data_usage JOIN country ON eu_data_usage.country = country.country WHERE country.region = 'European' AND eu_data_usage.subscriber_type = 'mobile';", "sources": ["public.eu_data_usage", "public.country"]}
+{"sql": "SELECT c.customer_id, c.primary_advisor, AVG(t.transaction_volume) as avg_daily_volume FROM customer c JOIN transaction t ON c.customer_id = t.customer_id WHERE t.transaction_date >= DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH) GROUP BY c.customer_id, c.primary_advisor;", "sources": ["public.customer", "public.transaction"]}
+{"sql": "SELECT region, SUM(biomass) FROM salmon_farms GROUP BY region HAVING AVG(temperature) > 15;", "sources": ["public.salmon_farms"]}
+{"sql": "SELECT agency FROM space_agencies_2 WHERE country IN ('India', 'China', 'Japan');", "sources": ["public.space_agencies_2"]}
+{"sql": "SELECT c.cause, SUM(d.amount) as total_donated FROM donations d JOIN causes c ON d.cause = c.cause WHERE c.created_at >= DATEADD(year, -1, CURRENT_TIMESTAMP) GROUP BY c.cause ORDER BY total_donated DESC;", "sources": ["public.donations", "public.causes"]}
+{"sql": "SELECT customers.name, customers.country FROM customers JOIN purchases ON customers.id = purchases.customer_id JOIN products ON purchases.product_id = products.id WHERE products.organic = TRUE GROUP BY customers.id ORDER BY SUM(purchases.quantity) DESC LIMIT 3;", "sources": ["public.products", "public.customers", "public.purchases"]}
+{"sql": "INSERT INTO animal_population (animal_name, program, added_date) VALUES ('Jaguar', 'habitat_preservation', CURRENT_TIMESTAMP);", "sources": ["public.animal_population"]}
+{"sql": "SELECT art FROM traditional_arts WHERE country = 'Canada' AND practitioners > 500;", "sources": ["public.traditional_arts"]}
+{"sql": "SELECT AVG(grant_avg) FROM (SELECT department, AVG(amount) AS grant_avg FROM research_grants GROUP BY department HAVING COUNT(*) >= 3) AS subquery;", "sources": ["public.research_grants"]}
+{"sql": "SELECT SUM(daily_distance) FROM london_buses WHERE date = '2022-03-01';", "sources": ["public.london_buses"]}
+{"sql": "SELECT DISTINCT department FROM Employees;", "sources": ["public.Employees"]}
+{"sql": "SELECT AVG(production_cost) FROM materials WHERE material_name IN ('Organic Cotton', 'Recycled Polyester', 'Hemp');", "sources": ["public.materials"]}
+{"sql": "SELECT AVG(posts.likes) FROM posts INNER JOIN users ON posts.user_id = users.id WHERE users.location = 'United States' AND posts.created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH);", "sources": ["public.posts", "public.users"]}
+{"sql": "SELECT AVG(cargo_handling.waiting_time) as avg_waiting_time FROM cargo_handling WHERE cargo_handling.port_code = 'NY';", "sources": ["public.cargo_handling"]}
+{"sql": "SELECT projects.name, funding_sources.source, SUM(funding_sources.amount), projects.start_date FROM biosensors.projects INNER JOIN biosensors.funding_sources ON projects.id = funding_sources.project_id WHERE projects.location = 'California' AND funding_sources.source LIKE 'Private%' GROUP BY projects.name, funding_sources.source, projects.start_date;", "sources": ["biosensors.projects", "biosensors.funding_sources"]}
+{"sql": "SELECT AVG(impact_score) FROM mining_operations WHERE location = 'Rocky Mountains';", "sources": ["public.mining_operations"]}
+{"sql": "SELECT SUM(production_cost) FROM companies WHERE num_sustainable_materials > 5;", "sources": ["public.companies"]}
+{"sql": "SELECT state, COUNT(*) FROM genetics_stats.research_projects GROUP BY state;", "sources": ["genetics_stats.research_projects"]}
+{"sql": "SELECT COUNT(DISTINCT startup_id) FROM startup_founders JOIN diversity_metrics ON startup_founders.id = diversity_metrics.startup_id WHERE age BETWEEN 20 AND 30 OR age BETWEEN 40 AND 50 OR age BETWEEN 60 AND 70;", "sources": ["public.diversity_metrics", "public.startup_founders"]}
+{"sql": "SELECT id, pH, production_date FROM ChemicalBatches WHERE pH > 9 AND production_date >= '2021-01-01';", "sources": ["public.ChemicalBatches"]}
+{"sql": "UPDATE donors SET amount_donated = 4000 WHERE country = 'India';", "sources": ["public.donors"]}
+{"sql": "SELECT COUNT(*) as total_initiatives FROM sustainability_initiatives WHERE location LIKE '%Asia%' AND year = 2021;", "sources": ["public.sustainability_initiatives"]}
+{"sql": "SELECT DATE(transaction_date) as transaction_day, COUNT(transaction_id) as number_of_transactions FROM transactions WHERE transaction_date BETWEEN '2022-01-01' AND '2022-01-31' GROUP BY transaction_day;", "sources": ["public.transactions"]}
+{"sql": "SELECT f.name, p.crop FROM Farmers f INNER JOIN Plots p ON f.id = p.farmer_id INNER JOIN Crops c ON p.crop = c.name WHERE f.location = 'Texas';", "sources": ["public.Farmers", "public.Plots", "public.Crops"]}
+{"sql": "UPDATE production_sites SET safety_score = 95 WHERE site_name = 'Site A';", "sources": ["public.production_sites"]}
+{"sql": "SELECT MIN(serving_size) FROM MealTypes WHERE meal_type = 'Gluten-free' AND store_type = 'Convenience Store';", "sources": ["public.MealTypes"]}
+{"sql": "UPDATE members SET age = 35 WHERE name = 'Alex Brown';", "sources": ["public.members"]}
+{"sql": "SELECT AVG(price) FROM eu_ets WHERE date BETWEEN '2020-01-01' AND '2020-12-31';", "sources": ["public.eu_ets"]}
+{"sql": "INSERT INTO farmland (farmland_id, country, precision_agriculture) VALUES (5, 'Brazil', TRUE);", "sources": ["public.farmland"]}
+{"sql": "SELECT SUM(cost) FROM SupportPrograms;", "sources": ["public.SupportPrograms"]}
+{"sql": "SELECT project_name FROM Project_Timelines WHERE is_sustainable = TRUE AND timeline > 120;", "sources": ["public.Project_Timelines"]}
+{"sql": "SELECT EXTRACT(MONTH FROM date) AS month, AVG(temperature) AS avg_temperature FROM ocean_temperature WHERE location = 'Pacific Ocean' GROUP BY month;", "sources": ["public.ocean_temperature"]}
+{"sql": "SELECT genre, quarter, SUM(budget) FROM MarketingBudget GROUP BY genre, quarter;", "sources": ["public.MarketingBudget"]}
+{"sql": "SELECT SUM(sale_price) FROM Sales WHERE is_sustainable = true AND sale_date >= DATEADD(year, -1, GETDATE());", "sources": ["public.Sales"]}
+{"sql": "SELECT AVG(attendance) FROM CulturalEvents WHERE city = 'New York';", "sources": ["public.CulturalEvents"]}
+{"sql": "SELECT MAX(otas.bookings) FROM otas INNER JOIN hotels ON otas.hotel_id = hotels.hotel_id WHERE hotels.category = 'City';", "sources": ["public.hotels", "public.otas"]}
+{"sql": "SELECT MIN(length) FROM songs WHERE genre = 'Rock' AND YEAR(id) >= 2010;", "sources": ["public.songs"]}
+{"sql": "SELECT don_id, don_name FROM donor WHERE don_id IN (SELECT don_id FROM (SELECT don_id, COUNT(DISTINCT org_id) as num_orgs FROM donation GROUP BY don_id) WHERE num_orgs > 1);", "sources": ["public.donor", "public.donation"]}
+{"sql": "SELECT cuisine, MIN(cooking_time) as min_cooking_time, MAX(cooking_time) as max_cooking_time FROM Dishes WHERE cuisine = 'Indian' GROUP BY cuisine;", "sources": ["public.Dishes"]}
+{"sql": "SELECT ArtistID, Age, Gender, Nationality FROM (SELECT ArtistID, Age, Gender, Nationality, ROW_NUMBER() OVER (ORDER BY Age DESC) AS Rank FROM ArtistsDemographics) AS Subquery WHERE Rank <= 2;", "sources": ["public.ArtistsDemographics"]}
+{"sql": "SELECT AVG(depth) FROM lead_mines;", "sources": ["public.lead_mines"]}
+{"sql": "SELECT condition, COUNT(patient_id) AS cases_count FROM patients WHERE has_disability = TRUE GROUP BY condition ORDER BY cases_count DESC;", "sources": ["public.patients"]}
+{"sql": "SELECT COUNT(*) FROM IntelligenceSatellites WHERE Operational = true;", "sources": ["public.IntelligenceSatellites"]}
+{"sql": "SELECT AVG(score) as avg_score FROM global_tournament WHERE country = 'Japan';", "sources": ["public.global_tournament"]}
+{"sql": "SELECT EXTRACT(MONTH FROM DonationDate) Month, SUM(DonationAmount) TotalDonations FROM DonationHistory WHERE DonationDate >= DATEADD(year, -1, CURRENT_DATE) GROUP BY EXTRACT(MONTH FROM DonationDate);", "sources": ["public.DonationHistory"]}
+{"sql": "SELECT SUM(amount_donated) FROM donors WHERE country = 'US';", "sources": ["public.donors"]}
+{"sql": "SELECT incident_type as event_type FROM emergency_incidents WHERE incident_type NOT IN ('Medical Emergency') UNION ALL SELECT report_type FROM crime_reports WHERE report_type NOT IN ('Theft');", "sources": ["public.emergency_incidents", "public.crime_reports"]}
+{"sql": "SELECT COUNT(Publications) FROM GraduateStudents WHERE Department = 'Mathematics' AND PublicationYear = 2020;", "sources": ["public.GraduateStudents"]}
+{"sql": "SELECT Region, SUM(Personnel) FROM Military_Personnel GROUP BY Region;", "sources": ["public.Military_Personnel"]}
+{"sql": "SELECT severity, COUNT(*) as total_vulnerabilities FROM NetworkDevices GROUP BY severity;", "sources": ["public.NetworkDevices"]}
+{"sql": "DELETE FROM dallas_fire_incidents WHERE incident_date < '2021-01-01 00:00:00';", "sources": ["public.dallas_fire_incidents"]}
+{"sql": "SELECT EXTRACT(MONTH FROM OrderDate) as Month, SUM(Quantity * Price) as TotalSales FROM Orders JOIN Dishes ON Orders.DishID = Dishes.DishID WHERE IsVegetarian = 1 GROUP BY Month;", "sources": ["public.Dishes", "public.Orders"]}
+{"sql": "SELECT sector, COUNT(*) FROM climate_finance WHERE location IN ('North America') GROUP BY sector;", "sources": ["public.climate_finance"]}
+{"sql": "SELECT type, cost FROM (SELECT type, cost, ROW_NUMBER() OVER (ORDER BY cost DESC) as rn FROM upgrades) sub WHERE rn = 1;", "sources": ["public.upgrades"]}
+{"sql": "SELECT E.EventCountry, GD.GameName, GD.Genre, SUM(GD.AvgHoursPlayed) AS TotalHoursPlayed, ROW_NUMBER() OVER (PARTITION BY E.EventCountry ORDER BY SUM(GD.AvgHoursPlayed) DESC) AS Rank FROM Players P JOIN EventParticipation EP ON P.PlayerID = EP.PlayerID JOIN EventDates E ON EP.EventID = E.EventID JOIN GameData GD ON P.PlayerID = GD.GameID GROUP BY E.EventCountry, GD.GameName, GD.Genre HAVING COUNT(DISTINCT P.PlayerID) > 1 ORDER BY E.EventCountry, TotalHoursPlayed DESC", "sources": ["public.EventDates", "public.EventParticipation", "public.Players", "public.GameData"]}
+{"sql": "SELECT COUNT(*) FROM world_heritage_sites WHERE country = 'India' AND is_unesco_site = true;", "sources": ["public.world_heritage_sites"]}
+{"sql": "SELECT dance_form FROM UNESCO_Intangible_Heritage WHERE year = 2010;", "sources": ["public.UNESCO_Intangible_Heritage"]}
+{"sql": "SELECT PlayerName, TotalPlaytime FROM Players ORDER BY TotalPlaytime DESC LIMIT 3;", "sources": ["public.Players"]}
+{"sql": "SELECT day_of_week, MAX(call_count) FROM call_volume GROUP BY day_of_week;", "sources": ["public.call_volume"]}
+{"sql": "SELECT EventLocations.Country, AVG(Events.Attendance) FROM Events INNER JOIN EventLocations ON Events.EventID = EventLocations.EventID GROUP BY EventLocations.Country;", "sources": ["public.Events", "public.EventLocations"]}
+{"sql": "SELECT material, production_cost FROM materials ORDER BY production_cost DESC LIMIT 1;", "sources": ["public.materials"]}
+{"sql": "UPDATE impact_investments SET amount = 1000000 WHERE id = 1;", "sources": ["public.impact_investments"]}
+{"sql": "DELETE FROM vehicle_safety WHERE make = 'Ford' AND model = 'Fusion' AND safety_rating < 5;", "sources": ["public.vehicle_safety"]}
+{"sql": "SELECT MIN(data_usage) FROM mobile_subscribers WHERE state = 'California' AND subscription_type = 'postpaid';", "sources": ["public.mobile_subscribers"]}
+{"sql": "SELECT species, (population_2021 - population_2019) as population_change FROM (SELECT species, MAX(CASE WHEN year = 2021 THEN population END) as population_2021, MAX(CASE WHEN year = 2019 THEN population END) as population_2019 FROM wildlife GROUP BY species) as population_changes;", "sources": ["public.wildlife"]}
+{"sql": "SELECT SUM(value) FROM socially_responsible_loans WHERE client_gender = 'female' AND date BETWEEN '2021-07-01' AND '2021-12-31';", "sources": ["public.socially_responsible_loans"]}
+{"sql": "SELECT SUM(budget) FROM african_region_table;", "sources": ["public.african_region_table"]}
+{"sql": "SELECT MAX(CountPerDept) FROM (SELECT Department, COUNT(*) AS CountPerDept FROM Employees GROUP BY Department) AS Subquery;", "sources": ["public.Employees"]}
+{"sql": "INSERT INTO esports_teams (id, name, organization) VALUES (1, 'Genesis Titans', 'Genesis'), (2, 'Genesis Dragons', 'Genesis');", "sources": ["public.esports_teams"]}
+{"sql": "SELECT COUNT(*) FROM financial_capability WHERE financially_capable = TRUE AND country LIKE 'Asia%';", "sources": ["public.financial_capability"]}
+{"sql": "SELECT AVG(revenue) FROM hotels WHERE country IN ('Brazil', 'Argentina') AND hotel_name LIKE '%eco%';", "sources": ["public.hotels"]}
+{"sql": "SELECT SUM(COUNT(*)) FROM Appointments WHERE Location LIKE '%Rural Germany%' AND Date >= DATE_SUB(CURRENT_DATE, INTERVAL 1 YEAR) GROUP BY EXTRACT(YEAR FROM Date);", "sources": ["public.Appointments"]}
+{"sql": "UPDATE SchoolC SET mental_health_status = 'Not Checked' WHERE last_checkup_date < DATE_SUB(CURDATE(), INTERVAL 6 MONTH);", "sources": ["public.SchoolC"]}
+{"sql": "SELECT country, SUM(cost) AS total_cost FROM space_programs GROUP BY country;", "sources": ["public.space_programs"]}
+{"sql": "SELECT country, production_amount FROM iron_ore_production ORDER BY production_amount DESC LIMIT 3;", "sources": ["public.iron_ore_production"]}
+{"sql": "SELECT category, (SUM(revenue) / (SELECT SUM(revenue) FROM category_revenue WHERE sale_date BETWEEN '2022-01-01' AND '2022-12-31')) * 100 FROM category_revenue WHERE sale_date BETWEEN '2022-01-01' AND '2022-12-31' GROUP BY category;", "sources": ["public.category_revenue"]}
+{"sql": "SELECT AVG(inventory.caloric_content) FROM inventory JOIN products ON inventory.product_id = products.product_id JOIN retailers ON inventory.retailer_id = retailers.retailer_id WHERE products.is_organic = TRUE AND retailers.region = 'Northeast';", "sources": ["public.products", "public.inventory", "public.retailers"]}
+{"sql": "SELECT MIN(investment_amount) as min_investment, MAX(investment_amount) as max_investment FROM housing_investments;", "sources": ["public.housing_investments"]}
+{"sql": "SELECT department, SUM(amount) as total_budget FROM Budget WHERE YEAR(budget_date) = 2019 GROUP BY department;", "sources": ["public.Budget"]}
+{"sql": "SELECT COUNT(*) FROM MilitaryInnovations WHERE country = 'China' AND year BETWEEN 2012 AND 2017;", "sources": ["public.MilitaryInnovations"]}
+{"sql": "SELECT product_subcategory, COUNT(*) FROM makeup_products GROUP BY product_subcategory;", "sources": ["public.makeup_products"]}
+{"sql": "SELECT SUM(amount) FROM food_assistance fa JOIN displaced_people d ON fa.country = d.country WHERE d.food_assistance_given = TRUE;", "sources": ["public.displaced_people", "public.food_assistance"]}
+{"sql": "SELECT destination, COUNT(*) as tourist_count FROM cultural_tourists WHERE nationality = 'USA' GROUP BY destination ORDER BY tourist_count DESC LIMIT 3;", "sources": ["public.cultural_tourists"]}
+{"sql": "SELECT material, SUM(quantity) as total_quantity FROM fair_trade_suppliers WHERE name IN ('Fair Trade Farms', 'Green Earth') GROUP BY material ORDER BY total_quantity DESC LIMIT 2;", "sources": ["public.fair_trade_suppliers"]}
+{"sql": "SELECT 'Africa' AS continent, COUNT(DISTINCT p.player_id) AS num_players FROM players p JOIN vr_tech v ON p.player_id = v.player_id WHERE p.region = 'Africa' UNION ALL SELECT 'South America' AS continent, COUNT(DISTINCT p.player_id) AS num_players FROM players p JOIN vr_tech v ON p.player_id = v.player_id WHERE p.region = 'South America';", "sources": ["public.players", "public.vr_tech"]}
+{"sql": "SELECT region, adoption_percentage FROM ai_adoption WHERE adoption_date = '2022-01-01';", "sources": ["public.ai_adoption"]}
+{"sql": "SELECT SUM(Quantity) FROM (SELECT * FROM ManufacturerMaterials JOIN Manufacturers ON ManufacturerMaterials.ManufacturerID = Manufacturers.ManufacturerID WHERE Spending IN (SELECT MIN(Spending) FROM Manufacturers LIMIT 2)) AS LowSpendingManufacturers JOIN Materials ON ManufacturerMaterials.MaterialID = Materials.MaterialID WHERE Materials.Type = 'Non-Sustainable';", "sources": ["public.Materials", "public.Manufacturers", "public.ManufacturerMaterials"]}
+{"sql": "SELECT MIN(heart_rate) FROM member_workouts WHERE workout_date >= CURDATE() - INTERVAL 30 DAY;", "sources": ["public.member_workouts"]}
+{"sql": "SELECT product_type, SUM(amount) as total_financing FROM ShariahFinance WHERE bank_name LIKE '%Middle East%' AND YEAR(issue_date) = 2021 GROUP BY product_type HAVING SUM(amount) > 1000000;", "sources": ["public.ShariahFinance"]}
+{"sql": "SELECT SUM(length) as total_length FROM songs WHERE genre = (SELECT genre FROM genres WHERE genre = 'pop');", "sources": ["public.songs", "public.genres"]}
+{"sql": "SELECT AVG(playtime) FROM player_sessions WHERE uses_vr = true AND game_genre = 'racing';", "sources": ["public.player_sessions"]}
+{"sql": "SELECT COUNT(*) FROM energy_efficiency.energy_efficiency_programs;", "sources": ["energy_efficiency.energy_efficiency_programs"]}
+{"sql": "SELECT COUNT(*) FROM sessions WHERE duration > 60 AND region = 'West';", "sources": ["public.sessions"]}
+{"sql": "SELECT region, AVG(productivity) FROM labor_productivity WHERE mine_type = 'Coal' GROUP BY region;", "sources": ["public.labor_productivity"]}
+{"sql": "SELECT shipping_mode, COUNT(shipping_mode) AS count FROM shipments WHERE shipment_date BETWEEN '2021-01-01' AND '2021-12-31' GROUP BY shipping_mode ORDER BY count DESC LIMIT 3;", "sources": ["public.shipments"]}
+{"sql": "SELECT squadron, SUM(aircraft_count) as total_aircraft FROM AircraftSquadrons GROUP BY squadron;", "sources": ["public.AircraftSquadrons"]}
+{"sql": "SELECT COUNT(*) FROM hospitals WHERE state = 'California';", "sources": ["public.hospitals"]}
+{"sql": "SELECT animals.status, AVG(habitats.size) AS avg_size FROM animals INNER JOIN habitats ON animals.id = habitats.animal_id WHERE animals.status = 'Endangered' GROUP BY animals.status;", "sources": ["public.animals", "public.habitats"]}
+{"sql": "SELECT resource_id, MAX(rating) as highest_rating FROM open_pedagogy GROUP BY resource_id ORDER BY highest_rating DESC LIMIT 1;", "sources": ["public.open_pedagogy"]}
+{"sql": "SELECT state, COUNT(*) FROM wastewater_plants WHERE state != 'California' AND year BETWEEN 2000 AND 2010 GROUP BY state;", "sources": ["public.wastewater_plants"]}
+{"sql": "SELECT brand_id, brand_name, ((products_this_year - products_last_year) * 100.0 / products_last_year) as growth_percentage FROM brands WHERE (products_this_year - products_last_year) > 0.5 * products_last_year ORDER BY growth_percentage DESC;", "sources": ["public.brands"]}
+{"sql": "SELECT funding_source_type, SUM(amount_funded) FROM funding_sources WHERE event_name IN (SELECT event_name FROM events WHERE event_category = 'visual arts') GROUP BY funding_source_type;", "sources": ["public.funding_sources", "public.events"]}
+{"sql": "SELECT AVG(budget) FROM biotech_startups WHERE region = 'Asia Pacific';", "sources": ["public.biotech_startups"]}
+{"sql": "SELECT SUM(NumTests) FROM SafetyTestingCounts WHERE Manufacturer = 'FutureAutomobiles';", "sources": ["public.SafetyTestingCounts"]}
+{"sql": "SELECT SUM(waste_kg) FROM waste_generation WHERE region = 'Beijing' AND year = 2018;", "sources": ["public.waste_generation"]}
+{"sql": "SELECT MIN(heart_rate) FROM heart_rate_data WHERE shoe_brand = 'Yeezy';", "sources": ["public.heart_rate_data"]}
+{"sql": "SELECT COUNT(DISTINCT species) FROM trees JOIN biomes ON trees.biome_id = biomes.biome_id WHERE trees.dbh > 50.0 AND biomes.name = 'Temperate Rainforest';", "sources": ["public.biomes", "public.trees"]}
+{"sql": "SELECT dispensaries.name, AVG(wholesale_orders.quantity) as avg_quantity FROM dispensaries INNER JOIN wholesale_orders ON dispensaries.id = wholesale_orders.dispensary_id WHERE dispensaries.state = 'Colorado' AND wholesale_orders.order_date BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 6 MONTH) AND CURRENT_DATE GROUP BY dispensaries.id ORDER BY avg_quantity DESC LIMIT 10;", "sources": ["public.dispensaries", "public.wholesale_orders"]}
+{"sql": "SELECT product_name, description  FROM shariah_compliant_products;", "sources": ["public.shariah_compliant_products"]}
+{"sql": "SELECT organizations.org_name, volunteers.volunteer_name, SUM(volunteers.hours_contributed) as total_hours FROM volunteers INNER JOIN organizations ON volunteers.org_id = organizations.org_id GROUP BY organizations.org_name, volunteers.volunteer_name;", "sources": ["public.organizations", "public.volunteers"]}
+{"sql": "SELECT COUNT(*) FROM patients WHERE condition = 'depression' AND therapy_sessions > 0;", "sources": ["public.patients"]}
+{"sql": "DROP TABLE vehicle_safety_testing;", "sources": ["public.vehicle_safety_testing"]}
+{"sql": "SELECT COUNT(*) FROM vessel_tracking WHERE region = 'Indian ocean' AND arrival_date >= DATE_SUB(CURRENT_DATE, INTERVAL 1 WEEK);", "sources": ["public.vessel_tracking"]}
+{"sql": "SELECT name FROM factories WHERE region = 'Americas' AND industry_4_0 = TRUE;", "sources": ["public.factories"]}
+{"sql": "SELECT category, start_year, COUNT(*), SUM(budget) FROM economic_diversification WHERE start_year >= 2019 GROUP BY category, start_year;", "sources": ["public.economic_diversification"]}
+{"sql": "SELECT region, 100.0 * AVG(CASE WHEN organic_purchases = true THEN 1.0 ELSE 0.0 END) AS pct_organic FROM suppliers WHERE region = 'Asia' GROUP BY region;", "sources": ["public.suppliers"]}
+{"sql": "SELECT p.product_name FROM purchase p JOIN product pr ON p.product_id = pr.product_id WHERE pr.is_cruelty_free = true AND p.purchase_date >= '2022-02-01' AND p.region = 'US';", "sources": ["public.purchase", "public.product"]}
+{"sql": "SELECT Category, AVG(Playtime) OVER(PARTITION BY Category) as AvgPlaytime FROM GameStats;", "sources": ["public.GameStats"]}
+{"sql": "SELECT SUM(WasteGeneration) FROM (SELECT Country, WasteGeneration FROM WasteData WHERE Continent = 'Africa' AND RecyclingRate < (SELECT AVG(RecyclingRate) FROM WasteData WHERE Continent = 'Africa') GROUP BY Country ORDER BY WasteGeneration DESC FETCH FIRST 2 ROWS ONLY) tmp;", "sources": ["public.WasteData"]}
+{"sql": "SELECT SUM(revenue) FROM Organic_Cosmetics WHERE category = 'Lipsticks';", "sources": ["public.Organic_Cosmetics"]}
+{"sql": "SELECT curator, COUNT(*) as total_exhibitions FROM Exhibitions GROUP BY curator;", "sources": ["public.Exhibitions"]}
+{"sql": "SELECT MIN(salary) FROM reporters WHERE city = 'Chicago';", "sources": ["public.reporters"]}
+{"sql": "INSERT INTO tv_shows (id, title, year, genre, creator, language) VALUES (3, 'TVShow3', 2021, 'Action', 'Fatima Ahmed', 'Arabic'), (4, 'TVShow4', 2020, 'Sci-Fi', 'Hassan Patel', 'Hindi');", "sources": ["public.tv_shows"]}
+{"sql": "DELETE FROM Employees WHERE Salary < 50000;", "sources": ["public.Employees"]}
+{"sql": "SELECT cause_id, COUNT(DISTINCT id) as num_donors FROM donors WHERE first_donation_date BETWEEN DATEADD(day, -30, GETDATE()) AND GETDATE() GROUP BY cause_id;", "sources": ["public.donors"]}
+{"sql": "SELECT region, SUM(personnel) FROM military_personnel GROUP BY region ORDER BY SUM(personnel) DESC", "sources": ["public.military_personnel"]}
+{"sql": "SELECT department, COUNT(*) as machines_need_maintenance FROM machines WHERE next_maintenance <= DATE_ADD(CURRENT_DATE, INTERVAL 1 WEEK) AND department = 'Renewable Energy' GROUP BY department;", "sources": ["public.machines"]}
+{"sql": "SELECT region FROM DroughtImpact;", "sources": ["public.DroughtImpact"]}
+{"sql": "SELECT name, SUM(co2_emissions) FROM conservation_projects GROUP BY name;", "sources": ["public.conservation_projects"]}
+{"sql": "SELECT SUM(investment_amount) FROM climate_communication_projects WHERE location LIKE 'Central America' AND investment_year IN (2019, 2020);", "sources": ["public.climate_communication_projects"]}
+{"sql": "SELECT medical_condition, medical_date FROM (SELECT medical_condition, medical_date, NTILE(4) OVER (ORDER BY medical_date) as medical_group FROM medical) AS subquery WHERE medical_group = 4;", "sources": ["public.medical"]}
+{"sql": "SELECT MIN(hours), MAX(hours) FROM DigitalLiteracyTraining WHERE region IN ('Middle East', 'Southeast Asia');", "sources": ["public.DigitalLiteracyTraining"]}
+{"sql": "SELECT s.species_name, COUNT(a.animal_id) AS total_admitted FROM animal_species s JOIN animal_rehab a ON s.species_id = a.species_id WHERE YEAR(a.rehab_date) = 2021 GROUP BY s.species_name;", "sources": ["public.animal_rehab", "public.animal_species"]}
+{"sql": "SELECT f.forest_id, f.region_id, SUM(tp.volume) as total_volume FROM forests f INNER JOIN timber_production tp ON f.forest_id = tp.forest_id GROUP BY f.forest_id, f.region_id;", "sources": ["public.timber_production", "public.forests"]}
+{"sql": "SELECT customer_id, MAX(transaction_value) FROM financial_crimes GROUP BY customer_id;", "sources": ["public.financial_crimes"]}
+{"sql": "SELECT route_id, MIN(DATEDIFF('day', LAG(clean_date) OVER (PARTITION BY route_id ORDER BY clean_date), clean_date)) FROM buses GROUP BY route_id;", "sources": ["public.buses"]}
+{"sql": "UPDATE staff_members SET email = 'new.email@example.com' WHERE staff_id = 5;", "sources": ["public.staff_members"]}
+{"sql": "SELECT initiative_name FROM lending_initiatives WHERE YEAR(launch_date) < 2015;", "sources": ["public.lending_initiatives"]}
+{"sql": "SELECT donations.donation_id, donations.donation_amount, donations.donation_date, campaigns.campaign_name FROM donations INNER JOIN campaigns ON donations.donation_date BETWEEN campaigns.start_date AND campaigns.end_date;", "sources": ["public.donations", "public.campaigns"]}
+{"sql": "SELECT company_id, SUM(amount) as total_funding FROM Funding WHERE funding_year = 2017 GROUP BY company_id ORDER BY total_funding DESC;", "sources": ["public.Funding"]}
+{"sql": "SELECT COUNT(*) AS total_initiatives, SUM(leader = 'Greenpeace' OR leader = 'World Wildlife Fund') AS ngo_led_initiatives FROM marine_conservation WHERE ocean = 'Atlantic Ocean';", "sources": ["public.marine_conservation"]}
+{"sql": "SELECT capacity FROM landfill_capacity_city_v2 WHERE location = 'New York' AND city = 'New York City';", "sources": ["public.landfill_capacity_city_v2"]}
+{"sql": "SELECT SUM(assets) FROM (SELECT client_id, assets FROM client_assets WHERE client_id IN (SELECT client_id FROM clients WHERE last_transaction_date >= '2021-10-01' AND last_transaction_date <= '2021-12-31')) clients_assets_q4", "sources": ["public.client_assets", "public.clients"]}
+{"sql": "SELECT SUM(sale_price) FROM EquipmentSales WHERE country = 'Canada';", "sources": ["public.EquipmentSales"]}
+{"sql": "SELECT programName, COUNT(*) as enrollment_count FROM SupportPrograms GROUP BY programName ORDER BY enrollment_count DESC LIMIT 3;", "sources": ["public.SupportPrograms"]}
+{"sql": "SELECT E.EventCountry, EXTRACT(MONTH FROM E.EventDate) AS Month, COUNT(DISTINCT EP.PlayerID) AS PlayersJoined, COUNT(DISTINCT VR.VRDevice) AS VRDevices, COUNT(DISTINCT G.GameID) AS UniqueGames FROM Players P JOIN EventParticipation EP ON P.PlayerID = EP.PlayerID JOIN EventDates E ON EP.EventID = E.EventID JOIN GamePlay G ON P.PlayerID = G.PlayerID JOIN VRAdoption VR ON P.PlayerID = VR.PlayerID GROUP BY E.EventCountry, EXTRACT(MONTH FROM E.EventDate)", "sources": ["public.GamePlay", "public.EventDates", "public.EventParticipation", "public.VRAdoption", "public.Players"]}
+{"sql": "DELETE FROM military_equipment WHERE quantity < 10;", "sources": ["public.military_equipment"]}
+{"sql": "SELECT SUM(investment) FROM economic_diversification WHERE country = 'Nigeria' AND year = 2019;", "sources": ["public.economic_diversification"]}
+{"sql": "SELECT AVG(stars) FROM hotel_ratings WHERE country IN ('Japan', 'South Korea');", "sources": ["public.hotel_ratings"]}
+{"sql": "DELETE FROM viewership WHERE viewer = 'Alex';", "sources": ["public.viewership"]}
+{"sql": "SELECT COUNT(*) FROM Cybersecurity_Incidents WHERE region = 'APAC' AND QUARTER(incident_date) = 3 AND incident_date >= '2021-07-01' AND incident_date <= '2021-09-30';", "sources": ["public.Cybersecurity_Incidents"]}
+{"sql": "SELECT equipment_type, SUM(maintenance_frequency) AS total_maintenance_frequency FROM equipment_maintenance GROUP BY equipment_type;", "sources": ["public.equipment_maintenance"]}
+{"sql": "SELECT AVG(dissolved_oxygen) FROM atlantic_ocean_fish WHERE region = 'Atlantic Ocean' AND species LIKE 'tropical%' AND year = 2022;", "sources": ["public.atlantic_ocean_fish"]}
+{"sql": "SELECT SUM(cost) FROM military_equipment WHERE vendor = 'Tactical Technologies';", "sources": ["public.military_equipment"]}
+{"sql": "SELECT Building_Permits.Permit_ID, Building_Type, Issue_Date, Worker_Count, Year FROM Building_Permits INNER JOIN Residential_Buildings ON Building_Permits.Building_Type = Residential_Buildings.Building_Type INNER JOIN Labor_Statistics ON Building_Permits.Permit_ID = Labor_Statistics.Permit_ID WHERE Issue_Date BETWEEN '2018-01-01' AND '2020-12-31';", "sources": ["public.Labor_Statistics", "public.Residential_Buildings", "public.Building_Permits"]}
+{"sql": "SELECT f.name, OF.production FROM farmers f INNER JOIN organic_farms OF ON f.farmer_id = OF.farmer_id WHERE OF.crop = 'Quinoa';", "sources": ["public.farmers", "public.organic_farms"]}
+{"sql": "SELECT AVG(speed) FROM wta_serves;", "sources": ["public.wta_serves"]}
+{"sql": "SELECT SUM(Emission_Amount) FROM CO2_Emissions WHERE Country IN ('USA', 'China');", "sources": ["public.CO2_Emissions"]}
+{"sql": "SELECT SUM(digital + physical) FROM sales WHERE genre = 'Latin';", "sources": ["public.sales"]}
+{"sql": "SELECT player FROM rebounds WHERE league = 'NBA' AND rebounds = (SELECT MAX(rebounds) FROM rebounds WHERE league = 'NBA');", "sources": ["public.rebounds"]}
+{"sql": "SELECT L.language, CP.practice FROM Languages L INNER JOIN CulturalPractices CP ON L.id = CP.language_id WHERE L.status = 'At Risk';", "sources": ["public.CulturalPractices", "public.Languages"]}
+{"sql": "SELECT attorney_last_name, COUNT(*) as case_count FROM criminal_cases GROUP BY attorney_last_name HAVING COUNT(*) > 50;", "sources": ["public.criminal_cases"]}
+{"sql": "SELECT SUM(artworks) FROM artworks WHERE collection LIKE '%Europe%' AND gender = 'Male';", "sources": ["public.artworks"]}
+{"sql": "SELECT material, rate FROM recycling_rates WHERE material IN ('plastic', 'metal') AND region != 'North';", "sources": ["public.recycling_rates"]}
+{"sql": "SELECT COUNT(*) FROM professionals WHERE state = 'Alaska' AND location = 'urban';", "sources": ["public.professionals"]}
+{"sql": "SELECT SpeciesName, AVG(WaterTemp) as AvgTemp FROM SpeciesWaterTemp INNER JOIN FishSpecies ON SpeciesWaterTemp.SpeciesID = FishSpecies.SpeciesID WHERE MONTH(Date) = 2 GROUP BY SpeciesName;", "sources": ["public.SpeciesWaterTemp", "public.FishSpecies"]}
+{"sql": "UPDATE Academic_Publications SET Title = 'Machine Learning for Social Good' WHERE Publication_ID IN (601, 605, 612);", "sources": ["public.Academic_Publications"]}
+{"sql": "SELECT name, medical_status FROM Astronauts WHERE medical_checkup_date >= '2020-01-01' AND medical_checkup_date < '2021-01-01';", "sources": ["public.Astronauts"]}
+{"sql": "SELECT name, production_metric FROM mines WHERE location = 'California';", "sources": ["public.mines"]}
+{"sql": "SELECT COUNT(*) FROM Events WHERE EventAttendance < 50 AND EventDate < '2022-07-01';", "sources": ["public.Events"]}
+{"sql": "SELECT city, SUM(views) as total_views FROM virtual_tours WHERE city IN ('CityA', 'CityB', 'CityC', 'CityD') GROUP BY city ORDER BY total_views DESC LIMIT 3;", "sources": ["public.virtual_tours"]}
+{"sql": "SELECT vehicle_id, maintenance_type, COUNT(*) AS num_requests FROM maintenance GROUP BY vehicle_id, maintenance_type;", "sources": ["public.maintenance"]}
+{"sql": "SELECT SUM(wins) FROM mlb_teams_mascots WHERE mascot LIKE 'C%';", "sources": ["public.mlb_teams_mascots"]}
+{"sql": "SELECT products.product_category, AVG(products.is_vegan) * 100.0 as percentage_vegan FROM products GROUP BY products.product_category;", "sources": ["public.products"]}
+{"sql": "SELECT COUNT(*) FROM Satellite_Launches WHERE Country = 'Japan';", "sources": ["public.Satellite_Launches"]}
+{"sql": "SELECT YEAR(start_date) AS year, MONTH(start_date) AS month, COUNT(*) AS projects FROM project_timeline WHERE end_date IS NOT NULL GROUP BY year, month;", "sources": ["public.project_timeline"]}
+{"sql": "SELECT AVG(co2_emissions) FROM co2_emissions WHERE product_name IN ('Leather Jacket', 'Wool Sweater') AND country_of_origin = 'Germany';", "sources": ["public.co2_emissions"]}
+{"sql": "SELECT size, COUNT(*) as popularity FROM orders GROUP BY size ORDER BY popularity DESC LIMIT 5;", "sources": ["public.orders"]}
+{"sql": "SELECT threat_type FROM threat_intel WHERE system_id = 'ABC123' AND detected_date >= DATE_SUB(CURRENT_DATE, INTERVAL 3 MONTH);", "sources": ["public.threat_intel"]}
+{"sql": "SELECT species, SUM(volume) as total_volume FROM forests WHERE year IN (2018, 2019) GROUP BY species;", "sources": ["public.forests"]}
+{"sql": "SELECT COUNT(*) FROM factories WHERE location = 'Asia' AND fair_trade_certified = true;", "sources": ["public.factories"]}
+{"sql": "SELECT Users.Name, AVG(Workouts.HeartRate) AS AvgWorkoutHeartRate, Users.RestingHeartRate FROM Users JOIN Workouts ON Users.ID = Workouts.UserID WHERE Workouts.Date >= DATEADD(month, -1, GETDATE()) GROUP BY Users.Name, Users.RestingHeartRate;", "sources": ["public.Users", "public.Workouts"]}
+{"sql": "ALTER TABLE policyholders ADD CONSTRAINT age_range CHECK (age >= 1 AND age <= 120);", "sources": ["public.policyholders"]}
+{"sql": "SELECT AVG(engagement_count) FROM virtual_tours vt INNER JOIN hotels h ON vt.hotel_id = h.id WHERE h.city = 'Berlin' AND h.country = 'Germany' GROUP BY engagement_date;", "sources": ["public.hotels", "public.virtual_tours"]}
+{"sql": "SELECT football_teams.team_name, football_matches.total_points, basketball_players.name FROM football_teams INNER JOIN football_matches ON football_teams.team_id = football_matches.team_id INNER JOIN basketball_players ON basketball_players.player_id = football_matches.player_id ORDER BY football_matches.total_points DESC;", "sources": ["public.football_teams", "public.basketball_players", "public.football_matches"]}
+{"sql": "SELECT v.ID, v.Name, v.Type FROM Vessels v LEFT JOIN SafetyIncidents si ON v.ID = si.VesselID WHERE si.ID IS NULL;", "sources": ["public.SafetyIncidents", "public.Vessels"]}
+{"sql": "SELECT artist_id, name, creation_date FROM (SELECT artist_id, name, creation_date, ROW_NUMBER() OVER (PARTITION BY artist_id ORDER BY creation_date ASC) as rn FROM Artworks) t WHERE rn <= 5;", "sources": ["public.Artworks"]}
+{"sql": "SELECT mission_name FROM SpaceMissions WHERE astronaut_nationality IN ('US', 'Canada') GROUP BY mission_name HAVING COUNT(DISTINCT astronaut_nationality) = 2;", "sources": ["public.SpaceMissions"]}
+{"sql": "SELECT AVG(Rainfall) as AvgAnnualRainfall, SUM(MaintenanceCost) as TotalAnnualMaintenanceCost  FROM BridgeRainfall  WHERE Region = 'Northwest' AND Year >= YEAR(CURRENT_DATE) - 5 GROUP BY Year;", "sources": ["public.BridgeRainfall"]}
+{"sql": "SELECT COUNT(*) FROM clinics WHERE country IN ('Canada', 'Mexico') AND offers_mental_health = TRUE;", "sources": ["public.clinics"]}
+{"sql": "SELECT COUNT(*) FROM CollectiveBargaining WHERE Sector = 'Healthcare' AND SignDate BETWEEN '2016-01-01' AND '2019-12-31';", "sources": ["public.CollectiveBargaining"]}
+{"sql": "SELECT MIN(waste_generation_kg_per_capita) FROM WasteGeneration WHERE region = 'Africa';", "sources": ["public.WasteGeneration"]}
+{"sql": "SELECT MIN(Score) FROM Scores WHERE GameType = 'VR';", "sources": ["public.Scores"]}
+{"sql": "SELECT team, SUM(tickets_sold) as total_tickets_sold FROM ticket_sales WHERE season = 2022 GROUP BY team;", "sources": ["public.ticket_sales"]}
+{"sql": "SELECT MIN(Cost) AS 'Minimum Cost', MAX(Cost) AS 'Maximum Cost' FROM PolicyAdvocacyEvents WHERE YEAR(EventDate) = 2020;", "sources": ["public.PolicyAdvocacyEvents"]}
+{"sql": "SELECT MIN(temp) FROM weather_record WHERE date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY);", "sources": ["public.weather_record"]}
+{"sql": "SELECT MAX(capacity) FROM smart_grids;", "sources": ["public.smart_grids"]}
+{"sql": "SELECT region, COUNT(*) FROM indigenous_communities GROUP BY region;", "sources": ["public.indigenous_communities"]}
+{"sql": "SELECT SUM(size) FROM public_buildings WHERE state IN ('New York', 'Illinois');", "sources": ["public.public_buildings"]}
+{"sql": "INSERT INTO wind_turbines (manufacturer, capacity, year) VALUES ('WindCo', 250, 2015);", "sources": ["public.wind_turbines"]}
+{"sql": "SELECT AVG(scores.score) FROM scores JOIN players ON scores.player_id = players.player_id JOIN tournaments ON scores.tournament_id = tournaments.tournament_id WHERE players.country = 'USA';", "sources": ["public.scores", "public.players", "public.tournaments"]}
+{"sql": "SELECT Region, SUM(Amount) FROM Expenditure WHERE Quarter = 1 AND Year = 2023 GROUP BY Region;", "sources": ["public.Expenditure"]}
+{"sql": "SELECT MAX(production_cost) FROM RecycledMaterialsGarments WHERE production_date BETWEEN DATEADD(month, -3, GETDATE()) AND GETDATE();", "sources": ["public.RecycledMaterialsGarments"]}
+{"sql": "SELECT MIN(age) FROM rural_clinics WHERE country = 'Mexico';", "sources": ["public.rural_clinics"]}
+{"sql": "SELECT country, download_speed FROM network_infrastructure ORDER BY download_speed DESC LIMIT 3;", "sources": ["public.network_infrastructure"]}
+{"sql": "SELECT machines.machine_id, machines.type, machines.schedule FROM machines RIGHT JOIN factories ON machines.factory_id = factories.factory_id WHERE factories.initiative IS NULL;", "sources": ["public.machines", "public.factories"]}
+{"sql": "SELECT EmployeeID, FirstName, LastName, (CASE WHEN Position = 'Avionics Engineer' THEN 'Senior Avionics Engineer' ELSE Position END) AS NewPosition, Department FROM Employees WHERE Department = 'Avionics';", "sources": ["public.Employees"]}
+{"sql": "SELECT SUM(revenue) FROM DigitalExperiences WHERE date >= DATE_SUB(CURRENT_DATE, INTERVAL 1 MONTH);", "sources": ["public.DigitalExperiences"]}
+{"sql": "SELECT COUNT(e.employee_id) as total_employees FROM employee e WHERE e.ethnicity IN ('African American', 'Hispanic', 'Native American');", "sources": ["public.employee"]}
+{"sql": "SELECT COUNT(*), AVG(cost) FROM projects WHERE country = 'Cambodia';", "sources": ["public.projects"]}
+{"sql": "SELECT country, satellites FROM satellites_in_orbit WHERE last_update <= '2022-07-01' AND country IN ('China', 'India', 'Japan', 'South Korea', 'Australia', 'Indonesia', 'Malaysia', 'Thailand', 'Vietnam', 'Philippines', 'New Zealand') GROUP BY country ORDER BY satellites DESC;", "sources": ["public.satellites_in_orbit"]}
+{"sql": "SELECT country, AVG(military_personnel) FROM HumanitarianAssistanceOperations GROUP BY country HAVING COUNT(*) > 200;", "sources": ["public.HumanitarianAssistanceOperations"]}
+{"sql": "SELECT COUNT(*) FROM company WHERE founder_count = 1 AND industry = 'biotech';", "sources": ["public.company"]}
+{"sql": "SELECT COUNT(*) FROM flu_shots f INNER JOIN patients p ON f.patient_id = p.patient_id WHERE p.age > 65 AND f.state = 'Texas';", "sources": ["public.patients", "public.flu_shots"]}
+{"sql": "SELECT line_name, stations AS highest_stations FROM train_lines ORDER BY stations DESC LIMIT 1; SELECT line_name, stations AS lowest_stations FROM train_lines ORDER BY stations ASC LIMIT 1;", "sources": ["public.train_lines"]}
+{"sql": "SELECT * FROM genetic_research WHERE community = 'Indigenous';", "sources": ["public.genetic_research"]}
+{"sql": "SELECT SUM(revenue) FROM sales WHERE initiative_type = 'Upcycling' AND initiative_region = 'Europe' AND sale_date BETWEEN '2021-01-01' AND '2021-03-31';", "sources": ["public.sales"]}
+{"sql": "SELECT AVG(word_count) AS avg_word_count FROM news_reporting WHERE category = 'Sports';", "sources": ["public.news_reporting"]}
+{"sql": "SELECT DISTINCT Country FROM Humanitarian_Assistance WHERE Quarter = 3 AND Year = 2022;", "sources": ["public.Humanitarian_Assistance"]}
+{"sql": "SELECT COUNT(*) FROM Volunteers", "sources": ["public.Volunteers"]}
+{"sql": "SELECT coowner_name FROM EcoHousing JOIN Property ON EcoHousing.property_id = Property.property_id WHERE development_name = 'EcoHousing';", "sources": ["public.Property", "public.EcoHousing"]}
+{"sql": "SELECT SUM(amount) FROM waste_generation WHERE sector = 'commercial' AND year = 2020;", "sources": ["public.waste_generation"]}
+{"sql": "INSERT INTO Companies (id, name, founder_group) VALUES (4, 'QueerTech', 'LGBTQ+'), (5, 'Accessible Solutions', 'Disabled'), (6, 'International Innovations', 'Immigrant');", "sources": ["public.Companies"]}
+{"sql": "SELECT M.MenuCategory, SUM(M.TotalRevenue) as TotalRevenuePerCategory FROM Menus M INNER JOIN Restaurants R ON M.RestaurantID = R.RestaurantID WHERE R.Name = 'H' AND MONTH(M.OrderDate) = 7 AND YEAR(M.OrderDate) = 2021 GROUP BY M.MenuCategory;", "sources": ["public.Restaurants", "public.Menus"]}
+{"sql": "DELETE FROM workforce w WHERE NOT EXISTS (SELECT 1 FROM factories f WHERE f.factory_id = w.factory_id AND f.ethical_manufacturing = true);", "sources": ["public.workforce", "public.factories"]}
+{"sql": "SELECT * FROM algorithmic_fairness_incidents WHERE incident_date >= '2020-01-01' AND region = 'Asia-Pacific';", "sources": ["public.algorithmic_fairness_incidents"]}
+{"sql": "SELECT brand FROM recycled_polyester WHERE country = 'Taiwan' AND year = 2020;", "sources": ["public.recycled_polyester"]}
+{"sql": "DELETE FROM visual_arts WHERE state = 'New York';", "sources": ["public.visual_arts"]}
+{"sql": "SELECT h.SiteName, a.ArtType FROM HeritageSites h JOIN ArtsHeritage a ON h.SiteName = a.SiteName;", "sources": ["public.ArtsHeritage", "public.HeritageSites"]}
+{"sql": "SELECT type FROM Vehicles WHERE last_service < DATE_SUB(CURDATE(), INTERVAL 1 MONTH);", "sources": ["public.Vehicles"]}
+{"sql": "SELECT COUNT(DISTINCT species) FROM arctic_marine_species WHERE region = 'Arctic';", "sources": ["public.arctic_marine_species"]}
+{"sql": "SELECT country, farm_type, AVG(dissolved_oxygen) AS avg_dissolved_oxygen FROM aquaculture_sites GROUP BY country, farm_type;", "sources": ["public.aquaculture_sites"]}
+{"sql": "SELECT MAX(amount) FROM investments WHERE sector = 'renewable energy';", "sources": ["public.investments"]}
+{"sql": "UPDATE users SET gender = 'non-binary' WHERE gender IS NULL;", "sources": ["public.users"]}
+{"sql": "SELECT AVG(delivery_time) FROM deliveries WHERE route_id = 'R02';", "sources": ["public.deliveries"]}
+{"sql": "SELECT MIN(transaction_date) FROM transactions WHERE account_number = 987654321;", "sources": ["public.transactions"]}
+{"sql": "SELECT treatment_type, COUNT(*) as count FROM treatments WHERE age BETWEEN 40 AND 50 GROUP BY treatment_type ORDER BY count DESC LIMIT 1;", "sources": ["public.treatments"]}
+{"sql": "SELECT SUM(Amount) FROM Budget WHERE Year = 2020 AND Category IN ('Education', 'Healthcare');", "sources": ["public.Budget"]}
+{"sql": "SELECT violation_type, MIN(fine) as min_fine FROM TrafficViolations WHERE location LIKE '%Residential%' GROUP BY violation_type;", "sources": ["public.TrafficViolations"]}
+{"sql": "SELECT Name FROM ArtPieces WHERE YearAdded > 2000;", "sources": ["public.ArtPieces"]}
+{"sql": "SELECT production_rate FROM (SELECT well_id, well_type, location, production_rate, ROW_NUMBER() OVER (ORDER BY production_rate DESC) rn FROM wells) t WHERE rn = 2;", "sources": ["public.wells"]}
+{"sql": "SELECT manufacturer_id, COUNT(*) FROM aircraft GROUP BY manufacturer_id;", "sources": ["public.aircraft"]}
+{"sql": "SELECT SUM(num_tickets_sold) AS total_tickets_sold FROM events WHERE event_type = 'Outdoor Concert';", "sources": ["public.events"]}
+{"sql": "SELECT gender, MIN(health_equity_metric_score) FROM patients GROUP BY gender;", "sources": ["public.patients"]}
+{"sql": "SELECT a.name, COUNT(*) as artworks_count FROM Artists a JOIN Artworks aw ON a.id = aw.artist_id GROUP BY a.name ORDER BY artworks_count DESC LIMIT 10;", "sources": ["public.Artists", "public.Artworks"]}
+{"sql": "SELECT MIN(rating) FROM Safety_Testing WHERE make = 'Italian';", "sources": ["public.Safety_Testing"]}
+{"sql": "SELECT COUNT(*) FROM Hospitals WHERE State = 'Texas';", "sources": ["public.Hospitals"]}
+{"sql": "SELECT country, COUNT(*) FROM heritage_sites GROUP BY country HAVING country IN ('Spain', 'Italy');", "sources": ["public.heritage_sites"]}
+{"sql": "SELECT s.State, COUNT(DISTINCT f.StationID) as StationCount, COUNT(DISTINCT fi.IncidentID) as IncidentCount FROM States s JOIN FireStations f ON s.StateID = f.StateID LEFT JOIN FireIncidents fi ON f.StationID = fi.StationID WHERE fi.IncidentDate >= DATEADD(year, -1, GETDATE()) GROUP BY s.State;", "sources": ["public.FireIncidents", "public.States", "public.FireStations"]}
+{"sql": "SELECT Region, PERCENTAGE(SUM(OnTime) OVER (PARTITION BY Region) / COUNT(*) OVER (PARTITION BY Region)) as PercentageOnTime FROM ProjectTimelineByBudget WHERE Region = 'Pacific' AND Half = 2 AND Budget > 10000000;", "sources": ["public.ProjectTimelineByBudget"]}
+{"sql": "SELECT COUNT(*) FROM climate_communication WHERE region = 'Sub-Saharan Africa' AND target = 'Coastal Communities' AND year BETWEEN 2020 AND 2021;", "sources": ["public.climate_communication"]}
+{"sql": "INSERT INTO military_tech (id, name, country, status) VALUES (4, 'T-14 Armata', 'Russia', 'active');", "sources": ["public.military_tech"]}
+{"sql": "INSERT INTO community_policing (id, event_date, event_type) VALUES (3, CURRENT_DATE - INTERVAL '2 weeks', 'Workshop'), (4, CURRENT_DATE, 'Meeting');", "sources": ["public.community_policing"]}
+{"sql": "SELECT c.country, b.brand, COUNT(DISTINCT c.partner_id) AS partner_count FROM CircularSupplyChain c JOIN Brands b ON c.brand_id = b.id GROUP BY c.country, b.brand;", "sources": ["public.CircularSupplyChain", "public.Brands"]}
+{"sql": "SELECT SUM(sales.revenue) as total_revenue FROM sales JOIN products ON sales.product_id = products.product_id WHERE products.is_organic = TRUE AND sales.country = 'Asia' AND YEAR(sales.sale_date) = YEAR(CURDATE());", "sources": ["public.products", "public.sales"]}
+{"sql": "SELECT DISTINCT category FROM Products INNER JOIN FairTradeCertifications ON Products.product_id = FairTradeCertifications.product_id WHERE FairTradeCertifications.certified = TRUE;", "sources": ["public.Products", "public.FairTradeCertifications"]}
+{"sql": "SELECT name FROM menu_items WHERE restaurant_id = 3 AND available_time < '17:00:00' GROUP BY name HAVING SUM(available) = 0;", "sources": ["public.menu_items"]}
+{"sql": "SELECT country, AVG(waste_generation_grams / population) as avg_waste_generation_per_capita FROM waste_generation WHERE year = 2020 GROUP BY country ORDER BY avg_waste_generation_per_capita DESC;", "sources": ["public.waste_generation"]}
+{"sql": "SELECT vehicle_type, SUM(cost) as total_cost FROM vehicle_maintenance WHERE maintenance_date BETWEEN '2021-07-01' AND '2021-09-30' GROUP BY vehicle_type;", "sources": ["public.vehicle_maintenance"]}
+{"sql": "SELECT SUM(meeting_count) FROM defense.russia_nato_diplomacy WHERE year BETWEEN 2020 AND 2021 AND country IN ('NATO', 'Russia');", "sources": ["defense.russia_nato_diplomacy"]}
+{"sql": "DELETE FROM marine_species WHERE conservation_status = 'Extinct';", "sources": ["public.marine_species"]}
+{"sql": "SELECT Cause, AVG(Amount) as AverageDonation FROM DonationsByCause GROUP BY Cause ORDER BY AverageDonation DESC;", "sources": ["public.DonationsByCause"]}
+{"sql": "SELECT COUNT(*) FROM cases JOIN attorneys ON cases.attorney_id = attorneys.id WHERE attorneys.title = 'Of Counsel';", "sources": ["public.attorneys", "public.cases"]}
+{"sql": "SELECT Council_ID FROM Policy_Feedback WHERE Policy_Area = 'Housing';", "sources": ["public.Policy_Feedback"]}
+{"sql": "UPDATE athlete_stats SET average_age = 0 WHERE game_count = 0;", "sources": ["public.athlete_stats"]}
+{"sql": "SELECT COUNT(*) FROM ThreatIntelligence WHERE EntryDate >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH);", "sources": ["public.ThreatIntelligence"]}
+{"sql": "SELECT title FROM movie WHERE genre = 'Animation' ORDER BY viewers DESC LIMIT 3;", "sources": ["public.movie"]}
+{"sql": "SELECT AVG(num_staff) AS avg_rural_hospitals_per_province, COUNT(*) FILTER (WHERE num_staff > 20) AS provinces_with_more_than_20_hospitals FROM ( SELECT province, COUNT(*) AS num_staff FROM rural_hospitals GROUP BY province ) subquery;", "sources": ["public.rural_hospitals"]}
+{"sql": "SELECT JobRole, AVG(Salary) as AvgSalary FROM Employees WHERE HireDate >= (CURRENT_DATE - INTERVAL '12 months') GROUP BY JobRole;", "sources": ["public.Employees"]}
+{"sql": "SELECT COUNT(*) FROM renewable_projects WHERE country = 'Canada' AND project_status = 'completed' AND year BETWEEN 2015 AND 2020;", "sources": ["public.renewable_projects"]}
+{"sql": "INSERT INTO reo_production (id, reo_type, production_year, impurity_level, mine_name) SELECT NULL, 'Neodymium Oxide', 2023, 0, m.name FROM mines m WHERE m.name = 'Brazil rare earths';", "sources": ["public.mines", "public.reo_production"]}
+{"sql": "SELECT r.clinic_id, COUNT(d.doctor_id) AS general_practitioners_count FROM doctors d JOIN rural_clinics r ON d.clinic_id = r.clinic_id WHERE r.state = 'Oregon' AND specialty = 'General Practitioner' GROUP BY r.clinic_id;", "sources": ["public.rural_clinics", "public.doctors"]}
+{"sql": "SELECT region, MAX(sustainability_metrics.carbon_footprint) as max_carbon_footprint, MAX(sustainability_metrics.water_usage) as max_water_usage, MAX(sustainability_metrics.waste_generation) as max_waste_generation FROM sustainability_metrics JOIN products ON sustainability_metrics.product_id = products.product_id GROUP BY region;", "sources": ["public.products", "public.sustainability_metrics"]}
+{"sql": "SELECT Accessible_Tech_Categories.category, SUM(Accessible_Tech_Categories.initiatives) FROM Accessible_Tech_Categories WHERE Accessible_Tech_Categories.country IN (SELECT Accessible_Tech_Categories.country FROM Accessible_Tech_Categories GROUP BY Accessible_Tech_Categories.country ORDER BY COUNT(Accessible_Tech_Categories.country) DESC LIMIT 3) GROUP BY Accessible_Tech_Categories.category;", "sources": ["public.Accessible_Tech_Categories"]}
+{"sql": "SELECT AgeGroup, AVG(FoodAidAmount) as AvgFoodAidPerPerson FROM FoodAid GROUP BY AgeGroup;", "sources": ["public.FoodAid"]}
+{"sql": "SELECT COUNT(*) FROM tours WHERE city = 'New York City' AND is_sustainable = true;", "sources": ["public.tours"]}
+{"sql": "SELECT mission_name FROM missions WHERE country1 != country2;", "sources": ["public.missions"]}
+{"sql": "SELECT AVG(height) FROM players WHERE position = 'Guard' AND league = 'NBA' AND gender = 'Female';", "sources": ["public.players"]}
+{"sql": "SELECT COUNT(*) FROM bioprocess.engineering_projects WHERE (location = 'RU' OR location = 'AU') AND type = 'Bioprocess';", "sources": ["bioprocess.engineering_projects"]}
+{"sql": "SELECT a.system_name, SUM(fr.issue_count) as total_issues FROM ai_systems a JOIN fairness_reports fr ON a.system_id = fr.system_id WHERE a.country = 'USA' GROUP BY a.system_name ORDER BY total_issues DESC;", "sources": ["public.fairness_reports", "public.ai_systems"]}
+{"sql": "SELECT gender, COUNT(*) as num_fans FROM fans WHERE last_attended_game >= DATEADD(year, -1, GETDATE()) GROUP BY gender;", "sources": ["public.fans"]}
+{"sql": "SELECT a.name, h.name FROM Animals a INNER JOIN AnimalEducation ae ON a.id = ae.animal_id INNER JOIN EducationPrograms e ON ae.program_id = e.id INNER JOIN Coordinators c ON e.coordinator_id = c.id INNER JOIN Habitat h ON a.habitat_id = h.id WHERE c.region = 'Americas';", "sources": ["public.Habitat", "public.Animals", "public.Coordinators", "public.EducationPrograms", "public.AnimalEducation"]}
+{"sql": "INSERT INTO menu_items (item_name, price) VALUES ('Steak', 25.50);", "sources": ["public.menu_items"]}
+{"sql": "SELECT category, event_count FROM community_engagement_by_category;", "sources": ["public.community_engagement_by_category"]}
+{"sql": "SELECT AVG(g.count) FROM (SELECT COUNT(grants.id) AS count FROM grants GROUP BY grants.department_id) AS g;", "sources": ["public.grants"]}
+{"sql": "SELECT MAX(quantity) FROM products WHERE certification IN ('recycled', 'fair_trade') GROUP BY certification HAVING COUNT(DISTINCT certification) = 2", "sources": ["public.products"]}
+{"sql": "SELECT AVG(score) FROM (SELECT score FROM game_scores WHERE user_id = 7 ORDER BY score LIMIT 2 OFFSET 2) AS median_scores;", "sources": ["public.game_scores"]}
+{"sql": "SELECT COUNT(DISTINCT user_id) FROM user_activity WHERE EXTRACT(MONTH FROM activity_date) = 1;", "sources": ["public.user_activity"]}
+{"sql": "SELECT SUM(quantity) FROM cotton_source WHERE country = 'USA' AND brand IN (SELECT brand FROM fair_labor WHERE commitment = 'yes');", "sources": ["public.cotton_source", "public.fair_labor"]}
+{"sql": "SELECT SUM(amount) FROM investments JOIN companies ON investments.company_id = companies.id WHERE investments.investment_round = 'Series A' AND companies.founder_gender = 'Female' AND companies.location = 'Latin America';", "sources": ["public.companies", "public.investments"]}
+{"sql": "SELECT COUNT(*) FROM highways WHERE location = 'Alberta' GROUP BY location HAVING COUNT(*) > 5;", "sources": ["public.highways"]}
+{"sql": "SELECT player_id, AVG(kills/deaths) as K_D_ratio FROM players INNER JOIN games ON players.id = games.player_id WHERE country = 'Japan' GROUP BY player_id;", "sources": ["public.players", "public.games"]}
+{"sql": "SELECT citizen_id, service_id FROM feedback;", "sources": ["public.feedback"]}
+{"sql": "SELECT SUM(donation_amount) FROM donors WHERE donor_name NOT IN (SELECT donor_name FROM donors WHERE donation_date < '2021-01-01' OR donation_date > '2021-12-31') AND donation_date BETWEEN '2021-01-01' AND '2021-12-31' AND donor_country = 'USA';", "sources": ["public.donors"]}
+{"sql": "SELECT age_group, AVG(price) as avg_price FROM tickets GROUP BY age_group;", "sources": ["public.tickets"]}
+{"sql": "SELECT type, SUM(capacity) as total_capacity FROM storage GROUP BY type ORDER BY total_capacity DESC;", "sources": ["public.storage"]}
+{"sql": "SELECT ProductCategory, SUM(Amount) AS TotalRevenue FROM Sales JOIN Revenue ON Sales.SaleID = Revenue.SaleID WHERE SaleDate >= DATEADD(MONTH, -1, GETDATE()) GROUP BY ProductCategory;", "sources": ["public.Revenue", "public.Sales"]}
+{"sql": "SELECT team_name, matches_played FROM english_premier_league;", "sources": ["public.english_premier_league"]}
+{"sql": "SELECT vehicle_name, safety_rating FROM (SELECT vehicle_name, safety_rating, RANK() OVER (ORDER BY safety_rating DESC) as safety_rank FROM auto_show WHERE vehicle_name LIKE '%Autonomous%') AS auton_ranks WHERE safety_rank = 1;", "sources": ["public.auto_show"]}
+{"sql": "SELECT Title, MAX(TicketSales) FROM TicketSales WHERE Genre = 'Rock' AND Country = 'Asia' AND Year = 2019;", "sources": ["public.TicketSales"]}
